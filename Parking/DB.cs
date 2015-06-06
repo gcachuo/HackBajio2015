@@ -1,12 +1,17 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Linq;
-using System.Windows.Documents;
 using ParkingCore;
+
+#endregion
+
 namespace Parking
 {
-    class DB
+    internal class DB
     {
-        EstacionamientoEntities db = new EstacionamientoEntities();
+        private readonly EstacionamientoEntities db = new EstacionamientoEntities();
+
         public string InsertarEntrada(Entradas entrada)
         {
             try
@@ -19,8 +24,8 @@ namespace Parking
             {
                 return ex.ToString();
             }
-            
         }
+
         public string InsertarSalida(Salidas salida)
         {
             try
@@ -33,8 +38,8 @@ namespace Parking
             {
                 return ex.ToString();
             }
-
         }
+
         public string InsertarRegistros(Registros registro)
         {
             try
@@ -47,8 +52,8 @@ namespace Parking
             {
                 return ex.ToString();
             }
-
         }
+
         public string ActualizarEstatus(Cajon cajonA)
         {
             var cajon = db.Cajon.FirstOrDefault(e => e.nombre_cjn == cajonA.nombre_cjn);
@@ -60,10 +65,10 @@ namespace Parking
             }
             catch (Exception e)
             {
-
                 return e.ToString();
             }
         }
+
         public IQueryable<Cajon> ObtenerCajones()
         {
             var query = from row in db.Cajon select row;
