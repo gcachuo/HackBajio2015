@@ -2,6 +2,7 @@
 
 using System;
 using System.IO.Ports;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using ParkingCore;
@@ -17,11 +18,16 @@ namespace Parking
         private SerialPort _serialPort1;
         DB db = new DB();
         EstacionamientoEntities entity = new EstacionamientoEntities();
-
+        private int autos;
         public SerialPort Load(DispatcherTimer timer)
         {
-            _serialPort1 = new SerialPort();
-            _serialPort1.PortName = "COM4";
+
+            autos = 0;
+            _serialPort1 = new SerialPort
+            {
+                PortName = "COM4",
+                ReadTimeout = 500
+            };
             timer.Start();
             try
             {
@@ -33,14 +39,13 @@ namespace Parking
                 return null;
             }
         }
-
-
         public int timer_Tick(SerialPort serialPort1)
         {
+
             try
             {
                 var datos = serialPort1.ReadLine();
-                var autos = 0;
+
                 if (datos == "In \r")
                 {
                     var entrada = new Entradas
@@ -67,7 +72,7 @@ namespace Parking
             }
             catch (Exception)
             {
-                return -1;
+                return autos;
             }
         }
 
