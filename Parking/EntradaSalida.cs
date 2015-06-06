@@ -14,10 +14,19 @@ namespace Parking
         private int _entrando;
         private int _saliendo;
 
-        public void Load(Timer timer1, SerialPort serialPort1)
+        public string Load(Timer timer1, SerialPort serialPort1)
         {
             timer1.Enabled = true;
-            serialPort1.Open();
+            try
+            {
+                serialPort1.Open();
+            }
+            catch (Exception ex)
+            {
+
+                return ex.ToString();
+            }
+            
         }
 
 
@@ -25,8 +34,7 @@ namespace Parking
         {
             try
             {
-                string datos;
-                datos = serialPort1.ReadLine();
+                var datos = serialPort1.ReadLine();
 
                 if (datos == "In \r")
                 {
