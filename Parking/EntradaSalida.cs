@@ -2,8 +2,8 @@
 
 using System;
 using System.IO.Ports;
+using System.Timers;
 using System.Windows.Controls;
-using Timer = System.Timers.Timer;
 
 #endregion
 
@@ -13,24 +13,25 @@ namespace Parking
     {
         private int _entrando;
         private int _saliendo;
+        private SerialPort _serialPort1;
 
-        public string Load(Timer timer1, SerialPort serialPort1)
+        public string Load(Timer timer)
         {
-            timer1.Enabled = true;
+            _serialPort1 = new SerialPort();
+            timer.Enabled = true;
             try
             {
-                serialPort1.Open();
+                _serialPort1.Open();
+                return "puerto serial abierto";
             }
             catch (Exception ex)
             {
-
                 return ex.ToString();
             }
-            
         }
 
 
-        private string timer1_Tick(SerialPort serialPort1, TextBox txtEntrada, TextBox txtSalida, TextBox txtArduino)
+        public string timer_Tick(SerialPort serialPort1,ref TextBox txtEntrada, ref TextBox txtSalida, ref TextBox txtArduino)
         {
             try
             {
@@ -40,14 +41,16 @@ namespace Parking
                 {
                     _entrando++;
                     txtEntrada.Text = _entrando.ToString();
+                    return _entrando.ToString();
                 }
                 if (datos == "Out\r")
                 {
                     _saliendo++;
                     txtSalida.Text = _saliendo.ToString();
+                    return _saliendo.ToString();
                 }
                 txtArduino.Text = datos;
-                return "Tick Completo";
+                return datos;
             }
             catch (Exception)
             {
@@ -56,7 +59,7 @@ namespace Parking
         }
 
 
-        private void Salir(SerialPort serialPort1)
+        public void Salir(SerialPort serialPort1)
         {
             serialPort1.Close();
         }
