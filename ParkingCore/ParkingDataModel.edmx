@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EstacionamientoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cajon">
+          <Key>
+            <PropertyRef Name="id_cjn" />
+          </Key>
+          <Property Name="id_cjn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_cjn" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="piso_cjn" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entradas">
+          <Key>
+            <PropertyRef Name="id_ent" />
+          </Key>
+          <Property Name="id_ent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_reg" Type="int" Nullable="false" />
+          <Property Name="entrada" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Registros">
+          <Key>
+            <PropertyRef Name="id_reg" />
+          </Key>
+          <Property Name="id_reg" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="placas_reg" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="extras_reg" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="color_reg" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="id_cjn" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salidas">
+          <Key>
+            <PropertyRef Name="id_sld" />
+          </Key>
+          <Property Name="id_sld" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_reg" Type="int" Nullable="false" />
+          <Property Name="salida" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="EstacionamientoModelStoreContainer">
+          <EntitySet Name="Cajon" EntityType="Self.Cajon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entradas" EntityType="Self.Entradas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registros" EntityType="Self.Registros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salidas" EntityType="Self.Salidas" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EstacionamientoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cajon">
+          <Key>
+            <PropertyRef Name="id_cjn" />
+          </Key>
+          <Property Name="id_cjn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_cjn" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="piso_cjn" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entradas">
+          <Key>
+            <PropertyRef Name="id_ent" />
+          </Key>
+          <Property Name="id_ent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_reg" Type="Int32" Nullable="false" />
+          <Property Name="entrada" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Registros">
+          <Key>
+            <PropertyRef Name="id_reg" />
+          </Key>
+          <Property Name="id_reg" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="placas_reg" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="extras_reg" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="color_reg" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="id_cjn" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salidas">
+          <Key>
+            <PropertyRef Name="id_sld" />
+          </Key>
+          <Property Name="id_sld" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_reg" Type="Int32" Nullable="false" />
+          <Property Name="salida" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="EstacionamientoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cajon" EntityType="Self.Cajon" />
+          <EntitySet Name="Entradas" EntityType="Self.Entradas" />
+          <EntitySet Name="Registros" EntityType="Self.Registros" />
+          <EntitySet Name="Salidas" EntityType="Self.Salidas" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EstacionamientoModelStoreContainer" CdmEntityContainer="EstacionamientoEntities">
+          <EntitySetMapping Name="Cajon">
+            <EntityTypeMapping TypeName="EstacionamientoModel.Cajon">
+              <MappingFragment StoreEntitySet="Cajon">
+                <ScalarProperty Name="id_cjn" ColumnName="id_cjn" />
+                <ScalarProperty Name="nombre_cjn" ColumnName="nombre_cjn" />
+                <ScalarProperty Name="piso_cjn" ColumnName="piso_cjn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entradas">
+            <EntityTypeMapping TypeName="EstacionamientoModel.Entradas">
+              <MappingFragment StoreEntitySet="Entradas">
+                <ScalarProperty Name="id_ent" ColumnName="id_ent" />
+                <ScalarProperty Name="id_reg" ColumnName="id_reg" />
+                <ScalarProperty Name="entrada" ColumnName="entrada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registros">
+            <EntityTypeMapping TypeName="EstacionamientoModel.Registros">
+              <MappingFragment StoreEntitySet="Registros">
+                <ScalarProperty Name="id_reg" ColumnName="id_reg" />
+                <ScalarProperty Name="placas_reg" ColumnName="placas_reg" />
+                <ScalarProperty Name="extras_reg" ColumnName="extras_reg" />
+                <ScalarProperty Name="color_reg" ColumnName="color_reg" />
+                <ScalarProperty Name="id_cjn" ColumnName="id_cjn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salidas">
+            <EntityTypeMapping TypeName="EstacionamientoModel.Salidas">
+              <MappingFragment StoreEntitySet="Salidas">
+                <ScalarProperty Name="id_sld" ColumnName="id_sld" />
+                <ScalarProperty Name="id_reg" ColumnName="id_reg" />
+                <ScalarProperty Name="salida" ColumnName="salida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
