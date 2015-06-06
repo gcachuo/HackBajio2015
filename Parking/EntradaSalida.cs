@@ -55,6 +55,8 @@ namespace Parking
                     db.InsertarEntrada(entrada);
                     _entrando++;
                     autos = _entrando - _saliendo;
+                    var window=new RegistroWindow();
+                    window.Show();
                     return autos;
                 }
                 if (datos == "Out\r")
