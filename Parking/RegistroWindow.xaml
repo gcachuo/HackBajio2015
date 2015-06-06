@@ -3,6 +3,71 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="RegistroWindow" Height="600" Width="300" Icon="image\Icono.ico" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="125*"/>
+            <RowDefinition Height="444*"/>
+        </Grid.RowDefinitions>
+        <Label>
+            <Label.Background>
+                <ImageBrush ImageSource="image/tipos/car.png" Stretch="Uniform"/>
+            </Label.Background>
+        </Label>
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#FF020202" Offset="1"/>
+                    <GradientStop Color="#FF212121" Offset="0.466"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="100*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="90*"/>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="80*"/>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="50*"/>
+                </Grid.RowDefinitions>
+                <Label Foreground="White" FontSize="13" Content="Placas:"></Label>
+                <TextBox Name="txtPlacas" Grid.Row="2"></TextBox>
+                <Label Foreground="White" FontSize="13" Content="Especificaciones:" Grid.Row="4"></Label>
+                <TextBox Name="txtEspeciones" Grid.Row="6"></TextBox>
+                <Label Foreground="White" FontSize="13" Content="Color:" Grid.Row="8"></Label>
+                <ComboBox Name="cmbcolor" Grid.Row="10"  ></ComboBox>
+                <Label Foreground="White" FontSize="13" Content="Cajón:" Grid.Row="12"></Label>
+                <ComboBox Name="cmbcajon" Grid.Row="14"  ></ComboBox>
+                <Button Name="Guardar" Content="Guardar" Grid.Row="16" FontWeight="Bold" Foreground="White" FontSize="16">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF067A1B" Offset="0"/>
+                            <GradientStop Color="#FF056817" Offset="1"/>
+                            <GradientStop Color="#FF09B027" Offset="0.506"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
