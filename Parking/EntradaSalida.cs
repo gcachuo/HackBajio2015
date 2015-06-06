@@ -19,6 +19,7 @@ namespace Parking
         public SerialPort Load(DispatcherTimer timer)
         {
             _serialPort1 = new SerialPort();
+            _serialPort1.PortName="COM4";
             timer.Start();
             try
             {
@@ -41,13 +42,11 @@ namespace Parking
                 if (datos == "In \r")
                 {
                     _entrando++;
-                    txtEntrada.Text = _entrando.ToString();
                     return _entrando.ToString();
                 }
                 if (datos == "Out\r")
                 {
                     _saliendo++;
-                    txtSalida.Text = _saliendo.ToString();
                     return _saliendo.ToString();
                 }
                 txtArduino.Text = datos;
