@@ -105,14 +105,6 @@ namespace Parking
         }
 
 
-        private void add_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            var cw = new CajonWindow();
-            cw.Show();
-            Left.Visibility = Visibility.Visible;
-            Right.Visibility = Visibility.Visible;
-        }
-
         private void vip_MouseUp(object sender, MouseButtonEventArgs e)
         {
             ObjCajon.tipo = "vip";
