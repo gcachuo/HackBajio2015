@@ -25,7 +25,7 @@ namespace Parking
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            MessageBox.Show("hola");
+           // MessageBox.Show("hola");
        }
         private void Right_MouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -40,6 +40,7 @@ namespace Parking
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
           calculo.Load(Cajon);
+          ObjCajon.tipo = "normal";
           timer.Tick += new EventHandler(dispatcherTimer_Tick);
           timer.Interval = new TimeSpan(0, 0, 5);
           timer.Start();
@@ -49,8 +50,6 @@ namespace Parking
         {
             Canvas cajon = Crear_Cajon(e.GetPosition(Mapa));
             Mapa.Children.Add(cajon);
-            Left.Visibility = Visibility.Hidden;
-            Right.Visibility = Visibility.Hidden;
         }
         public static Canvas Crear_Cajon(Point point)
         {

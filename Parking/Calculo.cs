@@ -24,74 +24,67 @@ namespace Parking
                 Height = 40,
             };
 
-            if (ObjCajon.name==null)
-            {
-                MessageBox.Show("Por favor, especifique el nombre del cajón");
-                CajonOrientacion = 'U';
-                image.Source = new BitmapImage(new Uri(PathImage + "up.png"));
-            }
-            else
-            {
-                switch (CajonOrientacion)
-                {
-                    //UP
-                    case 'U':
-                        if (orientacion == 'R')
-                        {
-                            CajonOrientacion = 'R';
-                            image.Source = new BitmapImage(new Uri(PathImage + "right.png"));
-                        }
-                        else
-                        {
-                            CajonOrientacion = 'L';
-                            image.Source = new BitmapImage(new Uri(PathImage + "left.png"));
-                        }
 
-                        break;
-                    //DOWN
-                    case 'D':
-                        if (orientacion == 'R')
-                        {
-                            CajonOrientacion = 'L';
-                            image.Source = new BitmapImage(new Uri(PathImage + "left.png"));
-                        }
-                        else
-                        {
-                            CajonOrientacion = 'R';
-                            image.Source = new BitmapImage(new Uri(PathImage + "right.png"));
-                        }
-                        break;
-                    //RIGHT
-                    case 'R':
-                        if (orientacion == 'R')
-                        {
-                            CajonOrientacion = 'D';
-                            image.Source = new BitmapImage(new Uri(PathImage + "down.png"));
-                        }
-                        else
-                        {
-                            CajonOrientacion = 'U';
-                            image.Source = new BitmapImage(new Uri(PathImage + "up.png"));
-                        }
-                        break;
-                    //LEFT
-                    case 'L':
-                        if (orientacion == 'R')
-                        {
-                            CajonOrientacion = 'U';
-                            image.Source = new BitmapImage(new Uri(PathImage + "up.png"));
-                        }
-                        else
-                        {
-                            CajonOrientacion = 'D';
-                            image.Source = new BitmapImage(new Uri(PathImage + "down.png"));
-                        }
-                        break;
-                    default:
+            switch (CajonOrientacion)
+            {
+                //UP
+                case 'U':
+                    if (orientacion == 'R')
+                    {
+                        CajonOrientacion = 'R';
+                        image.Source = new BitmapImage(new Uri(PathImage + "right.png"));
+                    }
+                    else
+                    {
+                        CajonOrientacion = 'L';
+                        image.Source = new BitmapImage(new Uri(PathImage + "left.png"));
+                    }
+
+                    break;
+                //DOWN
+                case 'D':
+                    if (orientacion == 'R')
+                    {
+                        CajonOrientacion = 'L';
+                        image.Source = new BitmapImage(new Uri(PathImage + "left.png"));
+                    }
+                    else
+                    {
+                        CajonOrientacion = 'R';
+                        image.Source = new BitmapImage(new Uri(PathImage + "right.png"));
+                    }
+                    break;
+                //RIGHT
+                case 'R':
+                    if (orientacion == 'R')
+                    {
+                        CajonOrientacion = 'D';
+                        image.Source = new BitmapImage(new Uri(PathImage + "down.png"));
+                    }
+                    else
+                    {
                         CajonOrientacion = 'U';
                         image.Source = new BitmapImage(new Uri(PathImage + "up.png"));
-                        break;
-                }
+                    }
+                    break;
+                //LEFT
+                case 'L':
+                    if (orientacion == 'R')
+                    {
+                        CajonOrientacion = 'U';
+                        image.Source = new BitmapImage(new Uri(PathImage + "up.png"));
+                    }
+                    else
+                    {
+                        CajonOrientacion = 'D';
+                        image.Source = new BitmapImage(new Uri(PathImage + "down.png"));
+                    }
+                    break;
+                default:
+                    CajonOrientacion = 'U';
+                    image.Source = new BitmapImage(new Uri(PathImage + "up.png"));
+                    break;
+
             }
             Cajon.Children.Clear();
             Cajon.Children.Add(image);
