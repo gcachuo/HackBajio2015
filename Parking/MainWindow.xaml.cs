@@ -25,6 +25,8 @@ namespace Parking
             InitializeComponent();
         }
         private static char cajonOrientacion;
+        //Esta region corresponde al valor de la variables de cajonOrientacion
+        #region Orientacion de Cajon
         private void Right_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Validar_Cajon('R');
@@ -116,6 +118,7 @@ namespace Parking
             Cajon.Children.Clear();
             Cajon.Children.Add(image);
         }
+        #endregion
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -129,6 +132,11 @@ namespace Parking
                 Source = new BitmapImage(new Uri(System.AppDomain.CurrentDomain.BaseDirectory + "up.png"))
             };
             Cajon.Children.Add(image);
+        }
+
+        private void Mapa_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
