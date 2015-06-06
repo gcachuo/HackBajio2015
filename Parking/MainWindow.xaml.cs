@@ -32,7 +32,7 @@ namespace Parking
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
            
-            MessageBox.Show( _es.timer_Tick(serialPort));
+            Entradas.Content= "Autos: "+_es.timer_Tick(serialPort);
         }
 
         private void Right_MouseUp(object sender, MouseButtonEventArgs e)
@@ -50,7 +50,7 @@ namespace Parking
             serialPort= _es.Load(timer);
             calculo.Load(Cajon);
             timer.Tick += dispatcherTimer_Tick;
-            timer.Interval = new TimeSpan(0, 0, 5);
+            timer.Interval = new TimeSpan(0, 0, 1);
             ObjCajon.tipo = "normal";
         }
 
@@ -103,15 +103,6 @@ namespace Parking
             }
             canvas.Children.Add(image);
             return canvas;
-        }
-
-
-        private void add_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            var cw = new CajonWindow();
-            cw.Show();
-            Left.Visibility = Visibility.Visible;
-            Right.Visibility = Visibility.Visible;
         }
 
         private void vip_MouseUp(object sender, MouseButtonEventArgs e)
