@@ -178,7 +178,6 @@
     <Resource Include="image\ocupado\dd.png" />
     <Resource Include="image\ocupado\dl.png" />
     <Resource Include="image\ocupado\dr.png" />
-    <Resource Include="image\ocupado\du.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ParkingCore\ParkingCore.csproj">
@@ -216,6 +215,9 @@
     <Resource Include="image\discapacitado\dl.png" />
     <Resource Include="image\discapacitado\dr.png" />
     <Resource Include="image\discapacitado\du.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\ocupado\du.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
