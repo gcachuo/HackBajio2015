@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.IO.Ports;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,9 +18,10 @@ namespace Parking
     /// </summary>
     public partial class MainWindow : Window
     {
+        private SerialPort serialPort;
         private readonly Calculo calculo = new Calculo();
-
         private readonly DispatcherTimer timer = new DispatcherTimer();
+        private EntradaSalida _es = new EntradaSalida();
 
         public MainWindow()
         {
@@ -29,7 +31,7 @@ namespace Parking
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            MessageBox.Show("hola");
+            _es.timer_Tick(serialPort);
         }
 
         private void Right_MouseUp(object sender, MouseButtonEventArgs e)
@@ -44,10 +46,11 @@ namespace Parking
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            serialPort= _es.Load(timer);
             calculo.Load(Cajon);
             timer.Tick += dispatcherTimer_Tick;
             timer.Interval = new TimeSpan(0, 0, 5);
-            timer.Start();
+            ObjCajon.tipo = "normal";
         }
 
         private void Mapa_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

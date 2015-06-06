@@ -4,6 +4,7 @@ using System;
 using System.IO.Ports;
 using System.Timers;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 #endregion
 
@@ -15,14 +16,14 @@ namespace Parking
         private int _saliendo;
         private SerialPort _serialPort1;
 
-        public string Load(Timer timer)
+        public SerialPort Load(DispatcherTimer timer)
         {
             _serialPort1 = new SerialPort();
-            timer.Enabled = true;
+            timer.Start();
             try
             {
                 _serialPort1.Open();
-                return "puerto serial abierto";
+                return _serialPort1;
             }
             catch (Exception ex)
             {
@@ -31,7 +32,7 @@ namespace Parking
         }
 
 
-        public string timer_Tick(SerialPort serialPort1,ref TextBox txtEntrada, ref TextBox txtSalida, ref TextBox txtArduino)
+        public string timer_Tick(SerialPort serialPort1,TextBox txtSalida=null,TextBox txtArduino=null, TextBox txtEntrada = null)
         {
             try
             {
