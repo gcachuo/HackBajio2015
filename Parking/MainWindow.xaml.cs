@@ -105,8 +105,6 @@ namespace Parking
             return canvas;
         }
 
-
-
         private void vip_MouseUp(object sender, MouseButtonEventArgs e)
         {
             ObjCajon.tipo = "vip";

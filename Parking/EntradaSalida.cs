@@ -33,28 +33,29 @@ namespace Parking
         }
 
 
-        public string timer_Tick(SerialPort serialPort1,TextBox txtSalida=null,TextBox txtArduino=null, TextBox txtEntrada = null)
+        public int timer_Tick(SerialPort serialPort1,TextBox txtSalida=null,TextBox txtArduino=null, TextBox txtEntrada = null)
         {
             try
             {
                 var datos = serialPort1.ReadLine();
-
+                var autos=0;
                 if (datos == "In \r")
                 {
                     _entrando++;
-                    return _entrando.ToString();
+                    autos = _entrando - _saliendo;
+                    return autos;
                 }
                 if (datos == "Out\r")
                 {
                     _saliendo++;
-                    return _saliendo.ToString();
+                    autos = _entrando - _saliendo;
+                    return autos;
                 }
-                txtArduino.Text = datos;
-                return datos;
+                return autos;
             }
             catch (Exception)
             {
-                return "Error al dar Tick";
+                return -1;
             }
         }
 
