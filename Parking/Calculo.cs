@@ -15,7 +15,7 @@ namespace Parking
         ///METODO 
         ///que recibe la orientacion del cajon para obtener la imagen
  
-        public void Validar_Cajon(char orientacion, TextBox txtCajon, Canvas Cajon)
+        public void Validar_Cajon(char orientacion, Canvas Cajon)
         {
             var image = new Image()
             {
@@ -24,7 +24,7 @@ namespace Parking
                 Height = 40,
             };
 
-            if (txtCajon.Text == "")
+            if (ObjCajon.name==null)
             {
                 MessageBox.Show("Por favor, especifique el nombre del cajón");
                 CajonOrientacion = 'U';
