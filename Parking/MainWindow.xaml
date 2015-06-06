@@ -9,7 +9,7 @@
             <RowDefinition Height="137*"/>
         </Grid.RowDefinitions>
         <!--MAPA-->
-        <WrapPanel Name="Mapa"  >
+        <WrapPanel Name="Mapa" MouseLeftButtonUp="Mapa_MouseLeftButtonUp" >
             <WrapPanel.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF3A3A3A"/>
