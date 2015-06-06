@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -15,11 +11,11 @@ namespace Parking
     {
         public static char CajonOrientacion;
         public string PathImage = "pack://application:,,,/image/";
-     
+        public DB db = new DB();
         ///METODO 
         ///que recibe la orientacion del cajon para obtener la imagen
-        ///
-        public void Validar_Cajon(char orientacion, Canvas Cajon)
+ 
+        public void Validar_Cajon(char orientacion, TextBox txtCajon, Canvas Cajon)
         {
             var image = new Image()
             {
@@ -28,7 +24,7 @@ namespace Parking
                 Height = 40,
             };
 
-            if (ObjCajon.name== "")
+            if (txtCajon.Text == "")
             {
                 MessageBox.Show("Por favor, especifique el nombre del cajón");
                 CajonOrientacion = 'U';
@@ -101,7 +97,7 @@ namespace Parking
             Cajon.Children.Add(image);
         }
 
-        public void Load(Canvas Cajon)
+        public void Load(Canvas cajon)
         {
             // UP
             CajonOrientacion = 'U';
@@ -112,14 +108,36 @@ namespace Parking
                 Height = 40,
                 Source = new BitmapImage(new Uri(PathImage + "up.png"))
             };
-            Cajon.Children.Add(image);
+            cajon.Children.Add(image);
         }
 
-        public double Total(int tiempo)
+        public double Total(double precio,double tiempofinal, double tiempoinicial)
         {
-            const int precio = 1;
-            var total = precio * tiempo;
+            var total = precio * Horas(tiempofinal, tiempoinicial);
             return total;
+        }
+        public double Horas(double tiempofinal, double tiempoinicial)
+        {
+            return tiempofinal - tiempoinicial;
+        }
+        public string ActualizarEstatus(string estatus)
+        {
+            try
+            {
+                var cajones = db.ObtenerCajones();
+                foreach (var cajon in cajones.Where(cajon => cajon.estatus_cjn != estatus))
+                {
+                    cajon.estatus_cjn = estatus;
+                    db.ActualizarEstatus(cajon);
+                }
+                return "estatus actualizados";
+            }
+            catch (Exception)
+            {
+
+                return "error al actualizar";
+            }
+
         }
     }
 }
