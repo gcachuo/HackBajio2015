@@ -4,8 +4,8 @@
         Icon= "image\Icono.ico" Title="MainWindow" Height="750" Width="820" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="546*"/>
-            <RowDefinition Height="36*"/>
+            <RowDefinition Height="543*"/>
+            <RowDefinition Height="39*"/>
             <RowDefinition Height="137*"/>
         </Grid.RowDefinitions>
         <!--MAPA-->
@@ -28,28 +28,36 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="55*"/>
-                <ColumnDefinition Width="55*"/>
-                <ColumnDefinition Width="55*"/>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="180*"/>
-                <ColumnDefinition Width="180*"/>
                 <ColumnDefinition Width="60*"/>
-                <ColumnDefinition Width="55*"/>
-                <ColumnDefinition Width="55*"/>
                 <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="350*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="60*"/>
             </Grid.ColumnDefinitions>
             <!--Boton rotar a la izquierda-->
-            <Label MouseUp="Left_MouseUp" Name="Left" FontWeight="Bold" FontSize="40" Grid.Column="1" BorderBrush="{x:Null}">
+            <Label Visibility="Hidden" MouseUp="Left_MouseUp" Name="Left" FontWeight="Bold" FontSize="40" Grid.Column="1" BorderBrush="{x:Null}">
                 <Label.Background>
                     <ImageBrush ImageSource="image/dleft.png" Stretch="Uniform"/>
                 </Label.Background>
             </Label>
             <!--Boton rotar a la derecha-->
-            <Label MouseUp="Right_MouseUp" Name="Right" FontWeight="Bold" Grid.Column="3" FontSize="40" BorderBrush="{x:Null}">
+            <Label Visibility="Hidden" MouseUp="Right_MouseUp" Name="Right" FontWeight="Bold" Grid.Column="5" FontSize="40" BorderBrush="{x:Null}">
                 <Label.Background>
                     <ImageBrush ImageSource="image/dright.png" Stretch="Uniform"/>
+                </Label.Background>
+
+            </Label>
+            <Label Grid.Column="7" MouseUp="add_MouseUp" Name="add">
+                <Label.Background>
+                    <ImageBrush ImageSource="image/add.png" Stretch="Uniform"/>
                 </Label.Background>
 
             </Label>
@@ -63,16 +71,14 @@
 
             </Canvas>
             <!--Nombrar Lugar-->
-            <Label Foreground="White" Grid.Column="5" VerticalContentAlignment="Center" Content="Nombre de Cajón:" FontSize="20"></Label>
-            <TextBox VerticalContentAlignment="Center" Name="txtCajon" Grid.Column="6" HorizontalContentAlignment="Center" FontSize="20"></TextBox>
             <!---->
             <!--Herramientas Edicion-->
-            <Label Name="Save" Grid.Column="8">
+            <Label Name="Save" Grid.Column="9">
                 <Label.Background>
                     <ImageBrush ImageSource="image/save.png" Stretch="Uniform"/>
                 </Label.Background>
             </Label>
-            <Label Name="Clean" Grid.Column="9">
+            <Label Name="Clean" Grid.Column="11">
                 <Label.Background>
                     <ImageBrush ImageSource="image/limpiar.png" Stretch="Uniform"/>
                 </Label.Background>
@@ -110,7 +116,7 @@
                             </LinearGradientBrush>
                         </ListBox.Background>
                     </ListBox>
-                    <Button Grid.Row="1" Content="+" Foreground="White" FontWeight="Bold" FontSize="25">
+                    <Button Grid.Row="1" Content="+" Foreground="White" FontWeight="ExtraBold" FontSize="13">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="#FF067A1B" Offset="0"/>
