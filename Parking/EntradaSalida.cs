@@ -27,7 +27,7 @@ namespace Parking
             }
             catch (Exception ex)
             {
-                return ex.ToString();
+                return null;
             }
         }
 

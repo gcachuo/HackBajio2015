@@ -31,7 +31,8 @@ namespace Parking
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            _es.timer_Tick(serialPort);
+           
+            MessageBox.Show( _es.timer_Tick(serialPort));
         }
 
         private void Right_MouseUp(object sender, MouseButtonEventArgs e)
