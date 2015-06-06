@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using ParkingCore;
 
@@ -40,7 +41,7 @@ namespace Parking
             }
         }
 
-        public string InsertarRegistros(Registros registro)
+        public string InsertarRegistro(Registros registro)
         {
             try
             {
@@ -74,5 +75,13 @@ namespace Parking
             var query = from row in db.Cajon select row;
             return query;
         }
+        public Cajon ObtieneCajon(string nombre)
+        {
+            var query = from row in db.Cajon
+                        where row.nombre_cjn==nombre
+                        select row ;
+            return query.Single();
+        }
+
     }
 }

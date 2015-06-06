@@ -26,7 +26,7 @@ namespace Parking
             _serialPort1 = new SerialPort
             {
                 PortName = "COM4",
-                ReadTimeout = 500
+                ReadTimeout = 1500
             };
             timer.Start();
             try
@@ -55,6 +55,8 @@ namespace Parking
                     db.InsertarEntrada(entrada);
                     _entrando++;
                     autos = _entrando - _saliendo;
+                    var window=new RegistroWindow();
+                    window.Show();
                     return autos;
                 }
                 if (datos == "Out\r")
