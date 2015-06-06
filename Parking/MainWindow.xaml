@@ -94,7 +94,7 @@
                     <ImageBrush ImageSource="image/save.png" Stretch="Uniform"/>
                 </Label.Background>
             </Label>
-            <Label Name="Clean" Grid.Column="15">
+            <Label Name="Clean" Grid.Column="15" MouseUp="Clean_MouseUp">
                 <Label.Background>
                     <ImageBrush ImageSource="image/limpiar.png" Stretch="Uniform"/>
                 </Label.Background>

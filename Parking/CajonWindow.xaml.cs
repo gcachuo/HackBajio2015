@@ -24,6 +24,7 @@ namespace Parking
             InitializeComponent();
         }
         string kind;
+    
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (txtName.Text == "" && kind=="")

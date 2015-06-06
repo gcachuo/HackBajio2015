@@ -22,7 +22,7 @@ namespace Parking
         private readonly Calculo calculo = new Calculo();
         private readonly DispatcherTimer timer = new DispatcherTimer();
         private EntradaSalida _es = new EntradaSalida();
-
+        int count = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -58,16 +58,17 @@ namespace Parking
         {
             var cajon = Crear_Cajon(e.GetPosition(Mapa));
             Mapa.Children.Add(cajon);
-            Left.Visibility = Visibility.Hidden;
-            Right.Visibility = Visibility.Hidden;
+            count++;
         }
 
-        public static Canvas Crear_Cajon(Point point)
+        public Canvas Crear_Cajon(Point point)
         {
+            
+
             var PathImage = "pack://application:,,,/image/";
             var image = new Image();
             image.Stretch = Stretch.UniformToFill;
-
+            image.Name = "C" + count.ToString();
             var canvas = new Canvas();
             switch (Calculo.CajonOrientacion)
             {
@@ -105,13 +106,6 @@ namespace Parking
         }
 
 
-        private void add_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            var cw = new CajonWindow();
-            cw.Show();
-            Left.Visibility = Visibility.Visible;
-            Right.Visibility = Visibility.Visible;
-        }
 
         private void vip_MouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -126,6 +120,11 @@ namespace Parking
         private void normal_MouseUp(object sender, MouseButtonEventArgs e)
         {
             ObjCajon.tipo = "normal";
+        }
+
+        private void Clean_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Mapa.Children.Clear();
         }
     }
 }
