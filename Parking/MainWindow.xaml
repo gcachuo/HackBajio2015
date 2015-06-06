@@ -28,36 +28,52 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="71*"/>
                 <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="12*"/>
                 <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="12*"/>
                 <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="350*"/>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="150*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="150*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="71*"/>
             </Grid.ColumnDefinitions>
             <!--Boton rotar a la izquierda-->
-            <Label Visibility="Hidden" MouseUp="Left_MouseUp" Name="Left" FontWeight="Bold" FontSize="40" Grid.Column="1" BorderBrush="{x:Null}">
+            <Label  MouseUp="Left_MouseUp" Name="Left" FontWeight="Bold" FontSize="40" Grid.Column="1" BorderBrush="{x:Null}">
                 <Label.Background>
                     <ImageBrush ImageSource="image/dleft.png" Stretch="Uniform"/>
                 </Label.Background>
             </Label>
             <!--Boton rotar a la derecha-->
-            <Label Visibility="Hidden" MouseUp="Right_MouseUp" Name="Right" FontWeight="Bold" Grid.Column="5" FontSize="40" BorderBrush="{x:Null}">
+            <Label MouseUp="Right_MouseUp" Name="Right" FontWeight="Bold" Grid.Column="5" FontSize="40" BorderBrush="{x:Null}">
                 <Label.Background>
                     <ImageBrush ImageSource="image/dright.png" Stretch="Uniform"/>
                 </Label.Background>
 
             </Label>
-            <Label Grid.Column="7" MouseUp="add_MouseUp" Name="add">
+            <Label Grid.Column="7" Name="normal" MouseUp="normal_MouseUp">
                 <Label.Background>
-                    <ImageBrush ImageSource="image/add.png" Stretch="Uniform"/>
+                    <ImageBrush ImageSource="image/tipos/car.png" Stretch="Uniform"/>
+                </Label.Background>
+
+            </Label>
+            <Label Grid.Column="9"  Name="discapacitados" MouseUp="discapacitados_MouseUp">
+                <Label.Background>
+                    <ImageBrush ImageSource="image/tipos/Discapacity.png" Stretch="Uniform"/>
+                </Label.Background>
+
+            </Label>
+            <Label Grid.Column="11"  Name="vip" MouseUp="vip_MouseUp">
+                <Label.Background>
+                    <ImageBrush ImageSource="image/tipos/VIP.png" Stretch="Uniform"/>
                 </Label.Background>
 
             </Label>
@@ -73,12 +89,12 @@
             <!--Nombrar Lugar-->
             <!---->
             <!--Herramientas Edicion-->
-            <Label Name="Save" Grid.Column="9">
+            <Label Name="Save" Grid.Column="13">
                 <Label.Background>
                     <ImageBrush ImageSource="image/save.png" Stretch="Uniform"/>
                 </Label.Background>
             </Label>
-            <Label Name="Clean" Grid.Column="11">
+            <Label Name="Clean" Grid.Column="15">
                 <Label.Background>
                     <ImageBrush ImageSource="image/limpiar.png" Stretch="Uniform"/>
                 </Label.Background>

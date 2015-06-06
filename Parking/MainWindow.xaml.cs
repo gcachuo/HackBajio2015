@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace Parking
 {
@@ -17,7 +18,15 @@ namespace Parking
         {
             InitializeComponent();
         }
-         
+        DispatcherTimer timer = new DispatcherTimer();
+       
+
+
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            MessageBox.Show("hola");
+       }
         private void Right_MouseUp(object sender, MouseButtonEventArgs e)
         {
             calculo.Validar_Cajon('R', Cajon);
@@ -31,6 +40,9 @@ namespace Parking
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
           calculo.Load(Cajon);
+          timer.Tick += new EventHandler(dispatcherTimer_Tick);
+          timer.Interval = new TimeSpan(0, 0, 5);
+          timer.Start();
         }
 
         private void Mapa_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -91,6 +103,21 @@ namespace Parking
             cw.Show();
             Left.Visibility = Visibility.Visible;
             Right.Visibility = Visibility.Visible;
+        }
+
+        private void vip_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            ObjCajon.tipo = "vip";
+        }
+
+        private void discapacitados_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            ObjCajon.tipo = "discapacitado";
+        }
+
+        private void normal_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            ObjCajon.tipo = "normal";
         }
 
     }
