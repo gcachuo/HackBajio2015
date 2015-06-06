@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EntradaSalida.cs" />
     <Compile Include="ObjCajon.cs" />
     <Compile Include="CajonWindow.xaml.cs">
       <DependentUpon>CajonWindow.xaml</DependentUpon>
