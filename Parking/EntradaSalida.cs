@@ -26,7 +26,7 @@ namespace Parking
             _serialPort1 = new SerialPort
             {
                 PortName = "COM4",
-                ReadTimeout = 500
+                ReadTimeout = 1500
             };
             timer.Start();
             try
