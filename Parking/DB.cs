@@ -49,6 +49,21 @@ namespace Parking
             }
 
         }
+        public string ActualizarEstatus(Cajon cajonA)
+        {
+            var cajon = db.Cajon.FirstOrDefault(e => e.nombre_cjn == cajonA.nombre_cjn);
+            try
+            {
+                if (cajon != null) cajon.estatus_cjn = cajonA.estatus_cjn;
+                db.SaveChanges();
+                return "Estatus de Cajon Actualizado";
+            }
+            catch (Exception e)
+            {
+
+                return e.ToString();
+            }
+        }
         public IQueryable<Cajon> ObtenerCajones()
         {
             var query = from row in db.Cajon select row;

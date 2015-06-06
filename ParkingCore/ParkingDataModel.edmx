@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EstacionamientoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EstacionamientoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cajon">
           <Key>
             <PropertyRef Name="id_cjn" />
@@ -12,6 +12,8 @@
           <Property Name="id_cjn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre_cjn" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="piso_cjn" Type="int" Nullable="false" />
+          <Property Name="estatus_cjn" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="tipo_cjn" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="Entradas">
           <Key>
@@ -45,8 +47,7 @@
           <EntitySet Name="Registros" EntityType="Self.Registros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Salidas" EntityType="Self.Salidas" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EstacionamientoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -57,6 +58,8 @@
           <Property Name="id_cjn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre_cjn" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="piso_cjn" Type="Int32" Nullable="false" />
+          <Property Name="estatus_cjn" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="tipo_cjn" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="Entradas">
           <Key>
@@ -99,6 +102,8 @@
           <EntitySetMapping Name="Cajon">
             <EntityTypeMapping TypeName="EstacionamientoModel.Cajon">
               <MappingFragment StoreEntitySet="Cajon">
+                <ScalarProperty Name="tipo_cjn" ColumnName="tipo_cjn" />
+                <ScalarProperty Name="estatus_cjn" ColumnName="estatus_cjn" />
                 <ScalarProperty Name="id_cjn" ColumnName="id_cjn" />
                 <ScalarProperty Name="nombre_cjn" ColumnName="nombre_cjn" />
                 <ScalarProperty Name="piso_cjn" ColumnName="piso_cjn" />

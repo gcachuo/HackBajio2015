@@ -17,5 +17,7 @@ namespace ParkingCore
         public int id_cjn { get; set; }
         public string nombre_cjn { get; set; }
         public int piso_cjn { get; set; }
+        public string estatus_cjn { get; set; }
+        public string tipo_cjn { get; set; }
     }
 }
