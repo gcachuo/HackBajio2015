@@ -2,9 +2,9 @@
 
 using System;
 using System.IO.Ports;
-using System.Timers;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using ParkingCore;
 
 #endregion
 
@@ -15,11 +15,13 @@ namespace Parking
         private int _entrando;
         private int _saliendo;
         private SerialPort _serialPort1;
+        DB db = new DB();
+        EstacionamientoEntities entity = new EstacionamientoEntities();
 
         public SerialPort Load(DispatcherTimer timer)
         {
             _serialPort1 = new SerialPort();
-            _serialPort1.PortName="COM4";
+            _serialPort1.PortName = "COM4";
             timer.Start();
             try
             {
@@ -33,20 +35,30 @@ namespace Parking
         }
 
 
-        public int timer_Tick(SerialPort serialPort1,TextBox txtSalida=null,TextBox txtArduino=null, TextBox txtEntrada = null)
+        public int timer_Tick(SerialPort serialPort1)
         {
             try
             {
                 var datos = serialPort1.ReadLine();
-                var autos=0;
+                var autos = 0;
                 if (datos == "In \r")
                 {
+                    var entrada = new Entradas
+                    {
+                        entrada = DateTime.Now
+                    };
+                    db.InsertarEntrada(entrada);
                     _entrando++;
                     autos = _entrando - _saliendo;
                     return autos;
                 }
                 if (datos == "Out\r")
                 {
+                    var salida = new Salidas()
+                    {
+                        salida = DateTime.Now
+                    };
+                    db.InsertarSalida(salida);
                     _saliendo++;
                     autos = _entrando - _saliendo;
                     return autos;
