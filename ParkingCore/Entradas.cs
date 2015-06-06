@@ -15,7 +15,6 @@ namespace ParkingCore
     public partial class Entradas
     {
         public int id_ent { get; set; }
-        public int id_reg { get; set; }
         public System.DateTime entrada { get; set; }
     }
 }

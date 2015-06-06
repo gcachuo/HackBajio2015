@@ -20,7 +20,6 @@
             <PropertyRef Name="id_ent" />
           </Key>
           <Property Name="id_ent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_reg" Type="int" Nullable="false" />
           <Property Name="entrada" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Registros">
@@ -38,7 +37,6 @@
             <PropertyRef Name="id_sld" />
           </Key>
           <Property Name="id_sld" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_reg" Type="int" Nullable="false" />
           <Property Name="salida" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityContainer Name="EstacionamientoModelStoreContainer">
@@ -66,7 +64,6 @@
             <PropertyRef Name="id_ent" />
           </Key>
           <Property Name="id_ent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_reg" Type="Int32" Nullable="false" />
           <Property Name="entrada" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Registros">
@@ -84,7 +81,6 @@
             <PropertyRef Name="id_sld" />
           </Key>
           <Property Name="id_sld" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_reg" Type="Int32" Nullable="false" />
           <Property Name="salida" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityContainer Name="EstacionamientoEntities" annotation:LazyLoadingEnabled="true">
@@ -114,7 +110,6 @@
             <EntityTypeMapping TypeName="EstacionamientoModel.Entradas">
               <MappingFragment StoreEntitySet="Entradas">
                 <ScalarProperty Name="id_ent" ColumnName="id_ent" />
-                <ScalarProperty Name="id_reg" ColumnName="id_reg" />
                 <ScalarProperty Name="entrada" ColumnName="entrada" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -134,7 +129,6 @@
             <EntityTypeMapping TypeName="EstacionamientoModel.Salidas">
               <MappingFragment StoreEntitySet="Salidas">
                 <ScalarProperty Name="id_sld" ColumnName="id_sld" />
-                <ScalarProperty Name="id_reg" ColumnName="id_reg" />
                 <ScalarProperty Name="salida" ColumnName="salida" />
               </MappingFragment>
             </EntityTypeMapping>
