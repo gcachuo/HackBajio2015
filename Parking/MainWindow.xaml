@@ -44,7 +44,7 @@
             </WrapPanel.Background>
 
         </WrapPanel>
-        <DataGrid Grid.Row="2">
+        <DataGrid Name="datagrid" Grid.Row="2" SelectionChanged="DataGrid_SelectionChanged" Loaded="DataGrid_Loaded">
             
         </DataGrid>
         <!--MENU-->

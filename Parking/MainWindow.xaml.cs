@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Linq;
 using ParkingCore;
 using System;
 using System.Collections.ObjectModel;
@@ -23,24 +24,24 @@ namespace Parking
         private readonly EntradaSalida _es = new EntradaSalida();
         private readonly Calculo calculo = new Calculo();
         private readonly DispatcherTimer timer = new DispatcherTimer();
-        
+
         private DB _db = new DB();
         private int count;
         private SerialPort serialPort;
         private int autosbase;
-     
+
         public MainWindow()
         {
             InitializeComponent();
-            
+
         }
 
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            var autos = autosbase+_es.timer_Tick(serialPort);
+            var autos = autosbase + _es.timer_Tick(serialPort);
             Entradas.Content = "Autos: " + autos;
-            Cajon1.Content = "Cajon 1: "+cajones(DB.cajon1);
+            Cajon1.Content = "Cajon 1: " + cajones(DB.cajon1);
             Cajon2.Content = "Cajon 2: " + cajones(DB.cajon2);
             Cajon3.Content = "Cajon 3: " + cajones(DB.cajon3);
         }
@@ -72,7 +73,7 @@ namespace Parking
         {
             try
             {
-                autosbase=_db.ObtenerAutos();
+                autosbase = _db.ObtenerAutos();
             }
             catch (Exception)
             {
@@ -85,21 +86,7 @@ namespace Parking
             ObjCajon.tipo = "normal";
 
         }
-        private void CargarTabla()
-        {
 
-            //ObservableCollection<User> users = new ObservableCollection<User>();
-            //users.Add(new User { FirstName = "firstname-1", LastName = "lastname-1" });
-            //users.Add(new User { FirstName = "firstname-2", LastName = "lastname-2" });
-            //users.Add(new User { FirstName = "firstname-3", LastName = "lastname-3" });
-            //users.Add(new User { FirstName = "firstname-4", LastName = "lastname-4" });
-            //DataGrid.ItemsSource = users;
-            //var registro = from row in db.Registros
-            //               join entrada in db.Entradas on row.id_ent equals entrada.id_ent
-            //               select row.id_reg;
-            
-           
-        }
 
         private void Mapa_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -111,7 +98,11 @@ namespace Parking
         public Canvas Crear_Cajon(Point point)
         {
             const string PathImage = "pack://application:,,,/image/";
-            var image = new Image {Stretch = Stretch.UniformToFill, Name = "C" + count};
+            var image = new Image
+            {
+                Stretch = Stretch.UniformToFill,
+                Name = "C" + count
+            };
             var canvas = new Canvas();
             switch (Calculo.CajonOrientacion)
             {
@@ -172,7 +163,29 @@ namespace Parking
         {
             EspecificacionWindow w = new EspecificacionWindow();
             w.Show();
-        
+
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DataGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+               
+                    datagrid.ItemsSource=(_db.CargarTabla());
+                
+            }
+            catch (Exception ex)
+            {
+                throw;
+                MessageBox.Show("Error en la Base de Datos"+ex);
+            }
+
         }
     }
 }

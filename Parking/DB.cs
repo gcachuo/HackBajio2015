@@ -2,10 +2,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
 using System.Windows;
-using System.Windows.Documents;
 using ParkingCore;
 
 #endregion
@@ -15,7 +13,7 @@ namespace Parking
     internal class DB
     {
         public readonly EstacionamientoEntities db = new EstacionamientoEntities();
-        
+
         public static string cajon1
         {
             get;
@@ -30,7 +28,6 @@ namespace Parking
         {
             get;
             set;
-
         }
 
         public string InsertarEntrada(Entradas entrada)
@@ -47,12 +44,44 @@ namespace Parking
             }
         }
 
+        public List<Registros> CargarTabla()
+        {
+            try
+            {
+                var registros = from row in db.Registros
+                                join id in db.Cajon on row.id_cjn equals id.id_cjn
+                                join id2 in db.Entradas on row.id_ent equals id2.id_ent
+                                select row;
+
+                var list = new List<Registros>();
+
+                foreach (Registros registro in registros)
+                {
+                    list.Add(new Registros()
+                    {
+                        id_reg = registro.id_reg,
+                        color_reg = registro.color_reg,
+                        extras_reg = registro.extras_reg,
+                        placas_reg = registro.placas_reg,
+                        id_ent = registro.id_ent,
+                        id_cjn = registro.id_reg
+                    });
+                }
+                return list;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+
+
+        }
+
         public string InsertarSalida(Salidas salida)
         {
             try
             {
-
-                //var id_reg=InputMessage;
                 var tiempo = DateTime.Now.Hour - ObtieneHoraEntradaAlSalir().Hour;
                 if (tiempo < 60)
                 {
@@ -123,6 +152,7 @@ namespace Parking
                         select row;
             return query.Single().estatus_cjn;
         }
+
         public Cajon ObtieneCajon2(string nombre)
         {
             var query = from row in db.Cajon
@@ -139,6 +169,7 @@ namespace Parking
             return query.OrderByDescending(x => x.entrada)
                 .FirstOrDefault();
         }
+
         public DateTime ObtieneHoraEntradaAlSalir()
         {
             var hora = from row in db.Entradas
@@ -146,6 +177,7 @@ namespace Parking
                        select row.entrada;
             return hora.Single();
         }
+
         public int ObtieneRegistroAlSalir()
         {
             var registro = from row in db.Registros
@@ -153,7 +185,7 @@ namespace Parking
                            select row.id_reg;
             return registro.Single();
         }
-        
+
         public int ObtenerAutos()
         {
             var entradas = from row in db.Entradas
@@ -162,27 +194,37 @@ namespace Parking
                           select row;
             return entradas.Count() - salidas.Count();
         }
+
         public IQueryable RegistroAuto()
         {
-            
             var list = from r in db.Registros
                        from c in db.Cajon
                        from e in db.Entradas
-                       select new { r.placas_reg, r.extras_reg, r.color_reg, c.nombre_cjn, e.entrada };
+                       select new
+                       {
+                           r.placas_reg,
+                           r.extras_reg,
+                           r.color_reg,
+                           c.nombre_cjn,
+                           e.entrada
+                       };
             return list;
         }
+
         public List<Registros> RRegistro()
         {
             var registro = (from r in db.Registros
-                           select r).ToList();
+                            select r).ToList();
             return registro;
         }
+
         public List<Entradas> REntrada()
         {
             var registro = (from r in db.Entradas
                             select r).ToList();
             return registro;
         }
+
         public List<Cajon> RCajon()
         {
             var registro = (from r in db.Cajon
