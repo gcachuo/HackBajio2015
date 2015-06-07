@@ -31,6 +31,7 @@
           <Property Name="extras_reg" Type="varchar" MaxLength="300" Nullable="false" />
           <Property Name="color_reg" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="id_cjn" Type="int" Nullable="false" />
+          <Property Name="id_ent" Type="int" />
         </EntityType>
         <EntityType Name="Salidas">
           <Key>
@@ -75,6 +76,7 @@
           <Property Name="extras_reg" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="color_reg" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="id_cjn" Type="Int32" Nullable="false" />
+          <Property Name="id_ent" Type="Int32" />
         </EntityType>
         <EntityType Name="Salidas">
           <Key>
@@ -117,6 +119,7 @@
           <EntitySetMapping Name="Registros">
             <EntityTypeMapping TypeName="EstacionamientoModel.Registros">
               <MappingFragment StoreEntitySet="Registros">
+                <ScalarProperty Name="id_ent" ColumnName="id_ent" />
                 <ScalarProperty Name="id_reg" ColumnName="id_reg" />
                 <ScalarProperty Name="placas_reg" ColumnName="placas_reg" />
                 <ScalarProperty Name="extras_reg" ColumnName="extras_reg" />

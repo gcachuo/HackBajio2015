@@ -1,9 +1,12 @@
 ﻿#region
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO.Ports;
+using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Threading;
 using ParkingCore;
 
@@ -13,75 +16,113 @@ namespace Parking
 {
     internal class EntradaSalida
     {
+        private readonly DB _db = new DB();
         private int _entrando;
         private int _saliendo;
         private SerialPort _serialPort1;
-        DB db = new DB();
-        EstacionamientoEntities entity = new EstacionamientoEntities();
-        private int autos;
+        private int _autos;
+
         public SerialPort Load(DispatcherTimer timer)
         {
-
-            autos = 0;
-            _serialPort1 = new SerialPort
-            {
-                PortName = "COM4",
-                ReadTimeout = 1500
-            };
-            timer.Start();
             try
             {
+                _autos = 0;
+                _serialPort1 = new SerialPort
+                {
+                    PortName = "COM6",
+                    ReadTimeout = 500
+                };
+                timer.Start();
+
                 _serialPort1.Open();
                 return _serialPort1;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
         }
+
         public int timer_Tick(SerialPort serialPort1)
         {
-
+            string datos;
             try
             {
-                var datos = serialPort1.ReadLine();
+                try
+                {
+                    datos = serialPort1.ReadLine();
 
-                if (datos == "In \r")
-                {
-                    var entrada = new Entradas
+                    var valores = datos.Split('/', 'A', 'B', 'C');
+                    switch (valores[1])
                     {
-                        entrada = DateTime.Now
-                    };
-                    db.InsertarEntrada(entrada);
-                    _entrando++;
-                    autos = _entrando - _saliendo;
-                    var window=new RegistroWindow();
-                    window.Show();
-                    return autos;
-                }
-                if (datos == "Out\r")
-                {
-                    var salida = new Salidas()
+                        case "In":
+                            RegistrarEntrada();
+                            break;
+                        case "Out":
+                            RegistrarSalida();
+                            break;
+                    }
+                    var cajon = new Cajon();
+                    var cajones2 = new List<Cajon>();
+                    for (var i = 2; i < 5; i++)
                     {
-                        salida = DateTime.Now
-                    };
-                    db.InsertarSalida(salida);
-                    _saliendo++;
-                    autos = _entrando - _saliendo;
-                    return autos;
+                        switch (valores[i])
+                        {
+                            case "S":
+                                cajon.estatus_cjn = "S";
+                                cajones2.Add(cajon);
+                                var status = _db.ActualizarEstatus(cajones2[i - 2]);
+                                break;
+                            case "N":
+                                cajon.estatus_cjn = "N";
+                                cajones2.Add(cajon);
+                                status = _db.ActualizarEstatus(cajones2[i - 2]);
+                                break;
+                        }
+                    }
+
+
+                   
                 }
-                return autos;
+                catch (Exception)
+                {
+                    datos = "";
+                }
+                return _autos;
             }
-            catch (Exception)
+            catch (TimeoutException)
             {
-                return autos;
+                return _autos;
             }
         }
-
 
         public void Salir(SerialPort serialPort1)
         {
             serialPort1.Close();
+        }
+
+        public void RegistrarEntrada()
+        {
+            var entrada = new Entradas
+            {
+                entrada = DateTime.Now
+            };
+            _db.InsertarEntrada(entrada);
+            _entrando++;
+            _autos = _entrando - _saliendo;
+            var window = new RegistroWindow();
+            window.Show();
+        }
+
+        public void RegistrarSalida()
+        {
+            var salida = new Salidas
+            {
+                salida = DateTime.Now
+            };
+            _db.InsertarSalida(salida);
+            _saliendo++;
+            _autos = _entrando - _saliendo;
         }
     }
 }
