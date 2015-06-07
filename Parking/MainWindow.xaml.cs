@@ -44,6 +44,37 @@ namespace Parking
             Cajon1.Content = "Cajon 1: " + cajones(DB.cajon1);
             Cajon2.Content = "Cajon 2: " + cajones(DB.cajon2);
             Cajon3.Content = "Cajon 3: " + cajones(DB.cajon3);
+            Mapa.Children.Clear();
+            if (DB.cajon1 == "S")
+            {
+                ObjCajon.tipo = "normal";
+                Mapa.Children.Add(Crear_Cajon(new Point(579, 143)));
+            }
+            else
+            {
+                ObjCajon.tipo = "ocupado";
+                Mapa.Children.Add(Crear_Cajon(new Point(579, 143)));
+            }
+            if (DB.cajon2 == "S")
+            {
+                ObjCajon.tipo = "normal";
+                Mapa.Children.Add(Crear_Cajon(new Point(629, 143)));
+            }
+            else
+            {
+                ObjCajon.tipo = "ocupado";
+                Mapa.Children.Add(Crear_Cajon(new Point(629, 143)));
+            }
+            if (DB.cajon3 == "S")
+            {
+                ObjCajon.tipo = "normal";
+                Mapa.Children.Add(Crear_Cajon(new Point(679, 143)));
+            }
+            else
+            {
+                ObjCajon.tipo = "ocupado";
+                Mapa.Children.Add(Crear_Cajon(new Point(679, 143)));
+            }
         }
         public string cajones(string cajon)
         {
@@ -84,7 +115,9 @@ namespace Parking
             timer.Tick += dispatcherTimer_Tick;
             timer.Interval = new TimeSpan(0, 0, 1);
             ObjCajon.tipo = "normal";
-
+            Mapa.Children.Add(Crear_Cajon(new Point(579, 143)));
+            Mapa.Children.Add(Crear_Cajon(new Point(629, 143)));
+            Mapa.Children.Add(Crear_Cajon(new Point(679, 143)));
         }
 
 
