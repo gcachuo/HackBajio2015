@@ -21,6 +21,7 @@
           </Key>
           <Property Name="id_ent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="entrada" Type="datetime" Nullable="false" />
+          <Property Name="idcambio" Type="int" />
         </EntityType>
         <EntityType Name="Registros">
           <Key>
@@ -66,6 +67,7 @@
           </Key>
           <Property Name="id_ent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="entrada" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idcambio" Type="Int32" />
         </EntityType>
         <EntityType Name="Registros">
           <Key>
@@ -111,6 +113,7 @@
           <EntitySetMapping Name="Entradas">
             <EntityTypeMapping TypeName="EstacionamientoModel.Entradas">
               <MappingFragment StoreEntitySet="Entradas">
+                <ScalarProperty Name="idcambio" ColumnName="idcambio" />
                 <ScalarProperty Name="id_ent" ColumnName="id_ent" />
                 <ScalarProperty Name="entrada" ColumnName="entrada" />
               </MappingFragment>

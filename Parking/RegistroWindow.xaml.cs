@@ -31,16 +31,17 @@ namespace Parking
                     extras_reg = txtEspeciones.Text,
                     color_reg = cmbcolor.Text,
                     id_cjn = c.id_cjn,
-                   id_ent = db.ObtieneUltimaEntrada().id_ent
+                    id_ent = db.ObtieneUltimaEntrada().id_ent
                 };
                 db.InsertarRegistro(reg);
+                var windows = new MainWindow();
+                windows.Refresh();
                 Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al registrar: "+ex);
+                MessageBox.Show("Error al registrar: " + ex);
             }
-           
         }
 
         private void RegistroWindow_OnLoaded(object sender, RoutedEventArgs e)
@@ -51,18 +52,29 @@ namespace Parking
                 {
                     cmbcajon.Items.Add(cajon.nombre_cjn);
                 }
-                string[] colores = { "blanco", "negro", "azul", "rojo", "verde", "naranja", "amarillo", "plateado", "cafe" };
+                string[] colores =
+                {
+                    "blanco", "negro", "azul", "rojo", "verde", "naranja", "amarillo", "plateado",
+                    "cafe"
+                };
                 foreach (var color in colores)
                 {
                     cmbcolor.Items.Add(color);
                 }
+                try
+                {
+                    var windows = new MainWindow();
+                    windows.Refresh();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error en la Base de Datos" + ex);
+                }
             }
             catch (Exception)
             {
-
                 MessageBox.Show("Error al cargar combobox");
             }
-           
         }
     }
 }

@@ -1,9 +1,6 @@
 ﻿#region
 
-using System.Linq;
-using ParkingCore;
 using System;
-using System.Collections.ObjectModel;
 using System.IO.Ports;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,19 +18,18 @@ namespace Parking
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly DB _db = new DB();
         private readonly EntradaSalida _es = new EntradaSalida();
         private readonly Calculo calculo = new Calculo();
         private readonly DispatcherTimer timer = new DispatcherTimer();
+        private int autosbase;
 
-        private DB _db = new DB();
         private int count;
         private SerialPort serialPort;
-        private int autosbase;
 
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
 
@@ -76,6 +72,7 @@ namespace Parking
                 Mapa.Children.Add(Crear_Cajon(new Point(679, 143)));
             }
         }
+
         public string cajones(string cajon)
         {
             {
@@ -90,6 +87,7 @@ namespace Parking
                 return cajon;
             }
         }
+
         private void Right_MouseUp(object sender, MouseButtonEventArgs e)
         {
             calculo.Validar_Cajon('R', Cajon);
@@ -194,31 +192,29 @@ namespace Parking
 
         private void Settings_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            EspecificacionWindow w = new EspecificacionWindow();
+            var w = new EspecificacionWindow();
             w.Show();
-
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
 
         private void DataGrid_Loaded(object sender, RoutedEventArgs e)
         {
+            Refresh();
+        }
+
+        public void Refresh()
+        {
             try
             {
-
-               
-                    datagrid.ItemsSource=(_db.CargarTabla());
-                
+                datagrid.ItemsSource = (_db.CargarTabla());
             }
             catch (Exception ex)
             {
-                throw;
-                MessageBox.Show("Error en la Base de Datos"+ex);
+                MessageBox.Show("Error en la Base de Datos" + ex);
             }
-
         }
     }
 }

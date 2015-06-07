@@ -16,5 +16,6 @@ namespace ParkingCore
     {
         public int id_ent { get; set; }
         public System.DateTime entrada { get; set; }
+        public Nullable<int> idcambio { get; set; }
     }
 }

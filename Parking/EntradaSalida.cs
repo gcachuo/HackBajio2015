@@ -2,6 +2,7 @@
 
 using System;
 using System.IO.Ports;
+using System.Windows;
 using System.Windows.Threading;
 using ParkingCore;
 
@@ -55,7 +56,7 @@ namespace Parking
                             RegistrarEntrada();
                             break;
                         case "Out":
-                            RegistrarSalida();
+                            MessageBox.Show(RegistrarSalida());
                             break;
                     }
                     DB.cajon1 = ComprobarLugar(valores[2], "a");
@@ -93,15 +94,15 @@ namespace Parking
             window.Show();
         }
 
-        public void RegistrarSalida()
+        public string RegistrarSalida()
         {
             var salida = new Salidas
             {
                 salida = DateTime.Now
             };
-            _db.InsertarSalida(salida);
             _saliendo++;
             _autos = _entrando - _saliendo;
+            return _db.InsertarSalida(salida);
         }
 
         public string ComprobarLugar(string status, string cajon)

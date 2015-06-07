@@ -11,39 +11,14 @@ namespace ParkingCore
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Registros
     {
-        public int id_reg
-        {
-            get;
-            set;
-        }
-        public string placas_reg
-        {
-            get;
-            set;
-        }
-        public string extras_reg
-        {
-            get;
-            set;
-        }
-        public string color_reg
-        {
-            get;
-            set;
-        }
-        public int id_cjn
-        {
-            get;
-            set;
-        }
-        public Nullable<int> id_ent
-        {
-            get;
-            set;
-        }
-       
+        public int id_reg { get; set; }
+        public string placas_reg { get; set; }
+        public string extras_reg { get; set; }
+        public string color_reg { get; set; }
+        public int id_cjn { get; set; }
+        public Nullable<int> id_ent { get; set; }
     }
 }
