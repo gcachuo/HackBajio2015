@@ -80,6 +80,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="EntradaSalida.cs" />
+    <Compile Include="EspecificacionWindow.xaml.cs">
+      <DependentUpon>EspecificacionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ObjCajon.cs" />
     <Compile Include="CajonWindow.xaml.cs">
       <DependentUpon>CajonWindow.xaml</DependentUpon>
@@ -89,7 +92,12 @@
     <Compile Include="RegistroWindow.xaml.cs">
       <DependentUpon>RegistroWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="tablaGrid.cs" />
     <Page Include="CajonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EspecificacionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

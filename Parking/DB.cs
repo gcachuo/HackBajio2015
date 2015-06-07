@@ -69,7 +69,7 @@ namespace Parking
                 return e.ToString();
             }
         }
-
+        
         public IQueryable<Cajon> ObtenerCajones()
         {
             var query = from row in db.Cajon select row;

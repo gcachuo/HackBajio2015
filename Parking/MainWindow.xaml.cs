@@ -1,5 +1,6 @@
 ﻿#region
 
+using ParkingCore;
 using System;
 using System.IO.Ports;
 using System.Windows;
