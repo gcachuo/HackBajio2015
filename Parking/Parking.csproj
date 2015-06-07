@@ -84,19 +84,12 @@
       <DependentUpon>EspecificacionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ObjCajon.cs" />
-    <Compile Include="CajonWindow.xaml.cs">
-      <DependentUpon>CajonWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Calculo.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="RegistroWindow.xaml.cs">
       <DependentUpon>RegistroWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="tablaGrid.cs" />
-    <Page Include="CajonWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="EspecificacionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -229,6 +222,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="image\normal\du.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\Settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,8 +8,10 @@ namespace Parking
 {
     class tablaGrid
     {
-        public string cajon { get; set; }
-        public bool status { get; set; }
+        public string placas { get; set; }
+        public string extras { get; set; }
+        public string color { get; set; }
+        public string nombre { get; set; }
         public DateTime entrada { get; set; }
 
     }

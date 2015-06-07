@@ -2,6 +2,7 @@
 
 using ParkingCore;
 using System;
+using System.Collections.ObjectModel;
 using System.IO.Ports;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,7 @@ namespace Parking
         private readonly EntradaSalida _es = new EntradaSalida();
         private readonly Calculo calculo = new Calculo();
         private readonly DispatcherTimer timer = new DispatcherTimer();
+        
         private DB _db = new DB();
         private int count;
         private SerialPort serialPort;
@@ -30,6 +32,7 @@ namespace Parking
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
 
@@ -81,6 +84,21 @@ namespace Parking
             timer.Interval = new TimeSpan(0, 0, 1);
             ObjCajon.tipo = "normal";
 
+        }
+        private void CargarTabla()
+        {
+
+            //ObservableCollection<User> users = new ObservableCollection<User>();
+            //users.Add(new User { FirstName = "firstname-1", LastName = "lastname-1" });
+            //users.Add(new User { FirstName = "firstname-2", LastName = "lastname-2" });
+            //users.Add(new User { FirstName = "firstname-3", LastName = "lastname-3" });
+            //users.Add(new User { FirstName = "firstname-4", LastName = "lastname-4" });
+            //DataGrid.ItemsSource = users;
+            //var registro = from row in db.Registros
+            //               join entrada in db.Entradas on row.id_ent equals entrada.id_ent
+            //               select row.id_reg;
+            
+           
         }
 
         private void Mapa_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -148,6 +166,13 @@ namespace Parking
         private void Clean_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Mapa.Children.Clear();
+        }
+
+        private void Settings_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            EspecificacionWindow w = new EspecificacionWindow();
+            w.Show();
+        
         }
     }
 }

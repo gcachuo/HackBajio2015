@@ -14,7 +14,8 @@ namespace Parking
 {
     internal class DB
     {
-        private readonly EstacionamientoEntities db = new EstacionamientoEntities();
+        public readonly EstacionamientoEntities db = new EstacionamientoEntities();
+        
         public static string cajon1
         {
             get;
@@ -152,6 +153,7 @@ namespace Parking
                            select row.id_reg;
             return registro.Single();
         }
+        
         public int ObtenerAutos()
         {
             var entradas = from row in db.Entradas
@@ -159,6 +161,33 @@ namespace Parking
             var salidas = from row in db.Salidas
                           select row;
             return entradas.Count() - salidas.Count();
+        }
+        public IQueryable RegistroAuto()
+        {
+            
+            var list = from r in db.Registros
+                       from c in db.Cajon
+                       from e in db.Entradas
+                       select new { r.placas_reg, r.extras_reg, r.color_reg, c.nombre_cjn, e.entrada };
+            return list;
+        }
+        public List<Registros> RRegistro()
+        {
+            var registro = (from r in db.Registros
+                           select r).ToList();
+            return registro;
+        }
+        public List<Entradas> REntrada()
+        {
+            var registro = (from r in db.Entradas
+                            select r).ToList();
+            return registro;
+        }
+        public List<Cajon> RCajon()
+        {
+            var registro = (from r in db.Cajon
+                            select r).ToList();
+            return registro;
         }
     }
 }
