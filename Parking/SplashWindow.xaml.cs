@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Parking
 {
@@ -24,13 +25,22 @@ namespace Parking
         {
             InitializeComponent();
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
-            Thread.Sleep(5000);
             MainWindow w = new MainWindow();
             w.Show();
-            this.Hide();
+           
+            timer.Stop();
+        }
+
+        DispatcherTimer timer = new DispatcherTimer();
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+           
+            timer.Tick += timer_Tick;
+            timer.Interval = new TimeSpan(0, 0, 3);
+            timer.Start();
+            
         }
 
     }

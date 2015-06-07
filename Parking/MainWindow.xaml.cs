@@ -23,13 +23,15 @@ namespace Parking
         private readonly Calculo calculo = new Calculo();
         private readonly DispatcherTimer timer = new DispatcherTimer();
         private int autosbase;
-
+        private static Point a, b, c;
         private int count;
         private SerialPort serialPort;
 
         public MainWindow()
         {
             InitializeComponent();
+            SplashWindow w = new SplashWindow();
+            w.Hide();
         }
 
 
@@ -44,32 +46,32 @@ namespace Parking
             if (DB.cajon1 == "S")
             {
                 ObjCajon.tipo = "normal";
-                Mapa.Children.Add(Crear_Cajon(new Point(579, 143)));
+                Mapa.Children.Add(Crear_Cajon(a));
             }
             else
             {
                 ObjCajon.tipo = "ocupado";
-                Mapa.Children.Add(Crear_Cajon(new Point(579, 143)));
+                Mapa.Children.Add(Crear_Cajon(a));
             }
             if (DB.cajon2 == "S")
             {
                 ObjCajon.tipo = "normal";
-                Mapa.Children.Add(Crear_Cajon(new Point(629, 143)));
+                Mapa.Children.Add(Crear_Cajon(b));
             }
             else
             {
                 ObjCajon.tipo = "ocupado";
-                Mapa.Children.Add(Crear_Cajon(new Point(629, 143)));
+                Mapa.Children.Add(Crear_Cajon(b));
             }
             if (DB.cajon3 == "S")
             {
                 ObjCajon.tipo = "normal";
-                Mapa.Children.Add(Crear_Cajon(new Point(679, 143)));
+                Mapa.Children.Add(Crear_Cajon(c));
             }
             else
             {
                 ObjCajon.tipo = "ocupado";
-                Mapa.Children.Add(Crear_Cajon(new Point(679, 143)));
+                Mapa.Children.Add(Crear_Cajon(c));
             }
         }
 
@@ -100,6 +102,8 @@ namespace Parking
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            
+           
             try
             {
                 autosbase = _db.ObtenerAutos();
@@ -113,9 +117,12 @@ namespace Parking
             timer.Tick += dispatcherTimer_Tick;
             timer.Interval = new TimeSpan(0, 0, 1);
             ObjCajon.tipo = "normal";
-            Mapa.Children.Add(Crear_Cajon(new Point(579, 143)));
-            Mapa.Children.Add(Crear_Cajon(new Point(629, 143)));
-            Mapa.Children.Add(Crear_Cajon(new Point(679, 143)));
+            a = new Point((500), (150));
+            b = new Point((700), (150));
+            c = new Point((900), (150));
+            Mapa.Children.Add(Crear_Cajon(a));
+            Mapa.Children.Add(Crear_Cajon(b));
+            Mapa.Children.Add(Crear_Cajon(c));
         }
 
 
@@ -139,31 +146,31 @@ namespace Parking
             {
                 case 'U':
                     image.Source = new BitmapImage(new Uri(PathImage + ObjCajon.tipo + "/du.png"));
-                    image.Width = 50;
-                    image.Height = 80;
+                    image.Width = 150;
+                    image.Height = 240;
                     Canvas.SetTop(image, point.Y);
-                    Canvas.SetLeft(image, point.X - 25);
+                    Canvas.SetLeft(image, point.X - 75);
                     break;
                 case 'D':
                     image.Source = new BitmapImage(new Uri(PathImage + ObjCajon.tipo + "/dd.png"));
-                    image.Width = 50;
-                    image.Height = 80;
-                    Canvas.SetTop(image, point.Y - 75);
-                    Canvas.SetLeft(image, point.X - 25);
+                    image.Width = 150;
+                    image.Height = 240;
+                    Canvas.SetTop(image, point.Y - 120);
+                    Canvas.SetLeft(image, point.X - 75);
                     break;
                 case 'R':
                     image.Source = new BitmapImage(new Uri(PathImage + ObjCajon.tipo + "/dr.png"));
-                    image.Width = 80;
-                    image.Height = 50;
-                    Canvas.SetTop(image, point.Y - 25);
-                    Canvas.SetLeft(image, point.X - 75);
+                    image.Width = 240;
+                    image.Height = 150;
+                    Canvas.SetTop(image, point.Y - 75);
+                    Canvas.SetLeft(image, point.X - 120);
                     break;
                 case 'L':
                     image.Source = new BitmapImage(new Uri(PathImage + ObjCajon.tipo + "/dl.png"));
-                    image.Width = 80;
-                    image.Height = 50;
-                    Canvas.SetTop(image, point.Y - 25);
-                    Canvas.SetLeft(image, point.X - 5);
+                    image.Width = 240;
+                    image.Height = 150;
+                    Canvas.SetTop(image, point.Y - 75);
+                    Canvas.SetLeft(image, point.X - 15);
                     break;
             }
             canvas.Children.Add(image);
@@ -207,14 +214,12 @@ namespace Parking
 
         public void Refresh()
         {
-            try
-            {
-                datagrid.ItemsSource = (_db.CargarTabla());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error en la Base de Datos" + ex);
-            }
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Registro v = new Registro();
+            v.Show();
         }
     }
 }

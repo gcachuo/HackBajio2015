@@ -7,7 +7,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="403*"/>
-            <RowDefinition Height="250*"/>
             <RowDefinition Height="36*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -44,9 +43,7 @@
             </WrapPanel.Background>
 
         </WrapPanel>
-        <DataGrid Name="datagrid" Grid.Row="2" SelectionChanged="DataGrid_SelectionChanged" Loaded="DataGrid_Loaded">
-            
-        </DataGrid>
+        
         <!--MENU-->
         <Grid Grid.Row="3">
             <Grid.Background>
@@ -57,23 +54,24 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="71*"/>
-                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="73*"/>
+                <ColumnDefinition Width="31*"/>
                 <ColumnDefinition Width="12*"/>
                 <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="12*"/>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="150*"/>
-                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="31*"/>
+                <ColumnDefinition Width="154*"/>
+                <ColumnDefinition Width="41*"/>
                 <ColumnDefinition Width="12*"/>
-                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="41*"/>
                 <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="41*"/>
+                <ColumnDefinition Width="154*"/>
                 <ColumnDefinition Width="40*"/>
-                <ColumnDefinition Width="150*"/>
-                <ColumnDefinition Width="40*"/>
-                <ColumnDefinition Width="12*"/>
-                <ColumnDefinition Width="40*"/>
-                <ColumnDefinition Width="71*"/>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="55*"/>
+                <ColumnDefinition Width="69*"/>
+                <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
             <!--Boton rotar a la izquierda-->
             <Label  MouseUp="Left_MouseUp" x:Name="Left" FontWeight="Bold" FontSize="40" Grid.Column="1" BorderBrush="{x:Null}">
@@ -124,6 +122,15 @@
                     <ImageBrush ImageSource="image/Settings.png" Stretch="Uniform"/>
                 </Label.Background>
             </Label>
+            <Button Content="Registros" Grid.Column="16" Foreground="White" Click="ButtonBase_OnClick" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFBB0D0D" Offset="0"/>
+                        <GradientStop Color="#FFAE1818" Offset="1"/>
+                        <GradientStop Color="#FF910000" Offset="0.504"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
             <!---->
 		</Grid>
 		<!--FIN-->

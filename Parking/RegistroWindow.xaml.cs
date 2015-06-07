@@ -2,6 +2,7 @@
 
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using ParkingCore;
 
 #endregion
@@ -43,7 +44,6 @@ namespace Parking
                 MessageBox.Show("Error al registrar: " + ex);
             }
         }
-
         private void RegistroWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
             try
