@@ -56,7 +56,7 @@ namespace Parking
                             RegistrarEntrada();
                             break;
                         case "Out":
-                            MessageBox.Show(RegistrarSalida());
+                            RegistrarSalida();
                             break;
                     }
                     DB.cajon1 = ComprobarLugar(valores[2], "a");
@@ -94,7 +94,7 @@ namespace Parking
             window.Show();
         }
 
-        public string RegistrarSalida()
+        public void RegistrarSalida()
         {
             var salida = new Salidas
             {
@@ -102,7 +102,7 @@ namespace Parking
             };
             _saliendo++;
             _autos = _entrando - _saliendo;
-            return _db.InsertarSalida(salida);
+            _db.InsertarSalida(salida);
         }
 
         public string ComprobarLugar(string status, string cajon)
