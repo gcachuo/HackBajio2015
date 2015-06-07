@@ -19,11 +19,14 @@ namespace Parking
     /// </summary>
     public partial class MainWindow : Window
     {
-        private SerialPort serialPort;
+        private readonly EntradaSalida _es = new EntradaSalida();
         private readonly Calculo calculo = new Calculo();
         private readonly DispatcherTimer timer = new DispatcherTimer();
-        private EntradaSalida _es = new EntradaSalida();
-        int count = 0;
+        private DB _db = new DB();
+        private int count;
+        private SerialPort serialPort;
+        private int autosbase;
+     
         public MainWindow()
         {
             InitializeComponent();
@@ -32,10 +35,26 @@ namespace Parking
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-           
-            Entradas.Content= "Autos: "+_es.timer_Tick(serialPort);
+            var autos = autosbase+_es.timer_Tick(serialPort);
+            Entradas.Content = "Autos: " + autos;
+            Cajon1.Content = "Cajon 1: "+cajones(DB.cajon1);
+            Cajon2.Content = "Cajon 2: " + cajones(DB.cajon2);
+            Cajon3.Content = "Cajon 3: " + cajones(DB.cajon3);
         }
-
+        public string cajones(string cajon)
+        {
+            {
+                if (cajon == "S")
+                {
+                    cajon = "Disponible";
+                }
+                if (cajon == "N")
+                {
+                    cajon = "Ocupado";
+                }
+                return cajon;
+            }
+        }
         private void Right_MouseUp(object sender, MouseButtonEventArgs e)
         {
             calculo.Validar_Cajon('R', Cajon);
@@ -48,11 +67,20 @@ namespace Parking
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            serialPort= _es.Load(timer);
+            try
+            {
+                autosbase=_db.ObtenerAutos();
+            }
+            catch (Exception)
+            {
+                autosbase = 0;
+            }
+            serialPort = _es.Load(timer);
             calculo.Load(Cajon);
             timer.Tick += dispatcherTimer_Tick;
             timer.Interval = new TimeSpan(0, 0, 1);
             ObjCajon.tipo = "normal";
+
         }
 
         private void Mapa_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -64,12 +92,8 @@ namespace Parking
 
         public Canvas Crear_Cajon(Point point)
         {
-            
-
-            var PathImage = "pack://application:,,,/image/";
-            var image = new Image();
-            image.Stretch = Stretch.UniformToFill;
-            image.Name = "C" + count.ToString();
+            const string PathImage = "pack://application:,,,/image/";
+            var image = new Image {Stretch = Stretch.UniformToFill, Name = "C" + count};
             var canvas = new Canvas();
             switch (Calculo.CajonOrientacion)
             {

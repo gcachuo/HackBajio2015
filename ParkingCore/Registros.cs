@@ -19,5 +19,6 @@ namespace ParkingCore
         public string extras_reg { get; set; }
         public string color_reg { get; set; }
         public int id_cjn { get; set; }
+        public Nullable<int> id_ent { get; set; }
     }
 }
