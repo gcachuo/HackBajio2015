@@ -24,7 +24,8 @@ namespace Parking
         private DB _db = new DB();
         private int count;
         private SerialPort serialPort;
-        private int autos;
+        private int autosbase;
+     
         public MainWindow()
         {
             InitializeComponent();
@@ -33,10 +34,26 @@ namespace Parking
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            autos += _es.timer_Tick(serialPort);
+            var autos = autosbase+_es.timer_Tick(serialPort);
             Entradas.Content = "Autos: " + autos;
+            Cajon1.Content = "Cajon 1: "+cajones(DB.cajon1);
+            Cajon2.Content = "Cajon 2: " + cajones(DB.cajon2);
+            Cajon3.Content = "Cajon 3: " + cajones(DB.cajon3);
         }
-
+        public string cajones(string cajon)
+        {
+            {
+                if (cajon == "S")
+                {
+                    cajon = "Disponible";
+                }
+                if (cajon == "N")
+                {
+                    cajon = "Ocupado";
+                }
+                return cajon;
+            }
+        }
         private void Right_MouseUp(object sender, MouseButtonEventArgs e)
         {
             calculo.Validar_Cajon('R', Cajon);
@@ -51,17 +68,18 @@ namespace Parking
         {
             try
             {
-                autos=_db.ObtenerAutos();
+                autosbase=_db.ObtenerAutos();
             }
             catch (Exception)
             {
-                autos = 0;
+                autosbase = 0;
             }
             serialPort = _es.Load(timer);
             calculo.Load(Cajon);
             timer.Tick += dispatcherTimer_Tick;
             timer.Interval = new TimeSpan(0, 0, 1);
             ObjCajon.tipo = "normal";
+
         }
 
         private void Mapa_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

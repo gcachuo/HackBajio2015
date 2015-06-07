@@ -24,7 +24,7 @@ namespace Parking
         {
             try
             {
-                var c = db.ObtieneCajon(cmbcajon.Text);
+                var c = db.ObtieneCajon2(cmbcajon.Text);
                 var reg = new Registros
                 {
                     placas_reg = txtPlacas.Text,
@@ -45,15 +45,24 @@ namespace Parking
 
         private void RegistroWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            foreach (var cajon in db.ObtenerCajones())
+            try
             {
-                cmbcajon.Items.Add(cajon.nombre_cjn);
+                foreach (var cajon in db.ObtenerCajones())
+                {
+                    cmbcajon.Items.Add(cajon.nombre_cjn);
+                }
+                string[] colores = { "blanco", "negro", "azul", "rojo", "verde", "naranja", "amarillo", "plateado", "cafe" };
+                foreach (var color in colores)
+                {
+                    cmbcolor.Items.Add(color);
+                }
             }
-            string[] colores = { "blanco", "negro", "azul", "rojo", "verde", "naranja", "amarillo", "plateado", "cafe" };
-            foreach (var color in colores)
+            catch (Exception)
             {
-                cmbcolor.Items.Add(color);
+
+                MessageBox.Show("Error al cargar combobox");
             }
+           
         }
     }
 }

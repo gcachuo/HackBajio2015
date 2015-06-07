@@ -1,12 +1,7 @@
 ﻿#region
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.IO.Ports;
-using System.Linq;
-using System.Windows;
 using System.Windows.Threading;
 using ParkingCore;
 
@@ -17,10 +12,10 @@ namespace Parking
     internal class EntradaSalida
     {
         private readonly DB _db = new DB();
+        private int _autos;
         private int _entrando;
         private int _saliendo;
         private SerialPort _serialPort1;
-        private int _autos;
 
         public SerialPort Load(DispatcherTimer timer)
         {
@@ -29,8 +24,8 @@ namespace Parking
                 _autos = 0;
                 _serialPort1 = new SerialPort
                 {
-                    PortName = "COM6",
-                    ReadTimeout = 500
+                    PortName = "COM4",
+                    ReadTimeout = 1500
                 };
                 timer.Start();
 
@@ -42,6 +37,7 @@ namespace Parking
                 return null;
             }
         }
+
 
         public int timer_Tick(SerialPort serialPort1)
         {
@@ -62,27 +58,9 @@ namespace Parking
                             RegistrarSalida();
                             break;
                     }
-                    var cajon = new Cajon();
-                    var cajones2 = new List<Cajon>();
-                    for (var i = 2; i < 5; i++)
-                    {
-                        switch (valores[i])
-                        {
-                            case "S":
-                                cajon.estatus_cjn = "S";
-                                cajones2.Add(cajon);
-                                var status = _db.ActualizarEstatus(cajones2[i - 2]);
-                                break;
-                            case "N":
-                                cajon.estatus_cjn = "N";
-                                cajones2.Add(cajon);
-                                status = _db.ActualizarEstatus(cajones2[i - 2]);
-                                break;
-                        }
-                    }
-
-
-                   
+                    DB.cajon1 = ComprobarLugar(valores[2], "a");
+                    DB.cajon2 = ComprobarLugar(valores[3], "b");
+                    DB.cajon3 = ComprobarLugar(valores[4], "c");
                 }
                 catch (Exception)
                 {
@@ -95,6 +73,7 @@ namespace Parking
                 return _autos;
             }
         }
+
 
         public void Salir(SerialPort serialPort1)
         {
@@ -123,6 +102,22 @@ namespace Parking
             _db.InsertarSalida(salida);
             _saliendo++;
             _autos = _entrando - _saliendo;
+        }
+
+        public string ComprobarLugar(string status, string cajon)
+        {
+            if (status.Length > 1)
+            {
+                status = status.Substring(0, 1);
+            }
+            if (_db.ObtieneCajon(cajon) == status) return status;
+            var caj = new Cajon
+            {
+                nombre_cjn = cajon,
+                estatus_cjn = status
+            };
+            _db.ActualizarEstatus(caj);
+            return status;
         }
     }
 }
